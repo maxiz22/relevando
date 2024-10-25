@@ -18,7 +18,7 @@ public class MenuPrincipal extends Menu {
         System.out.println("2. Gestión de Trámites");
         System.out.println("3. Gestión de Responsables");
         System.out.println("4. Gestión de Categorías");
-        System.out.println("5. Salir");
+ 
     }
 
     @Override
@@ -41,9 +41,6 @@ public class MenuPrincipal extends Menu {
                 CategoriaView  menuCategoria = new CategoriaView(relevandoApp.getCategoriaController());
                 menuCategoria.iniciarMenu();
                 break;
-	        case 5:
-	               System.out.println("Saliendo de la aplicación...");
-	                break;
             default:
                 System.out.println("Opción inválida.");
         }
@@ -51,6 +48,6 @@ public class MenuPrincipal extends Menu {
 
     @Override
     protected boolean esOpcionSalir(int opcion) {
-        return opcion == 4;
+        return opcion == 5;
     }
 }

@@ -26,7 +26,7 @@ public class TramiteView  extends Menu {
 	    protected void procesarOpcion(int opcion) {
 	        switch (opcion) {
 	            case 1:
-	            	
+	            	scanner.nextLine();
 	             	System.out.println("Ingrese el responsable:");
 	             	int responsableId = scanner.nextInt();
 	              

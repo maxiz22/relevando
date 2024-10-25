@@ -25,6 +25,7 @@ public class PeligroView extends Menu {
     protected void procesarOpcion(int opcion) {
         switch (opcion) {
             case 1:
+            	scanner.nextLine();
             	System.out.println("Ingrese el título de la categoría:");
                 String titulo = scanner.nextLine();
                 System.out.println("Ingrese la descripción de la categoría:");
