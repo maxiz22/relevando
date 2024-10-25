@@ -30,7 +30,7 @@ public class MenuPrincipal extends Menu {
             	  menuPeligros.iniciarMenu();
                   break;
             case 2:
-                TramiteView menuTramite = new TramiteView(relevandoApp.getTramiteController());
+                TramiteView menuTramite = new TramiteView(relevandoApp.getTramiteController(),null);
                 menuTramite.iniciarMenu();
                 break;
             case 3:
