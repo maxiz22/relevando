@@ -21,10 +21,14 @@ public class Relevando {
     
 
     public void initApp() {
+    	
+       //Instancia todos los controladores
  	   setCategoriaController(new CategoriaController());
  	   setPeligroController(new PeligroController());
  	   setResponsableController(new ResponsableController());
- 	   setTramiteController(new TramiteController());
+ 	   setTramiteController(new TramiteController(this));
+ 	   
+ 	   //Inicia el menu principal
  	   MenuPrincipal menuPrincipal = new MenuPrincipal(this);
        menuPrincipal.iniciarMenu();
     }

@@ -2,6 +2,9 @@ package ar.nix.relevando.models;
 
 import java.sql.Timestamp;
 
+import ar.nix.relevando.enums.EstadoPeligro;
+import ar.nix.relevando.utils.RandomStringGenerator;
+
 public class Peligro {
 
     private Integer id;
@@ -20,15 +23,22 @@ public class Peligro {
     private Timestamp fechaModificado;
     
     
-    public Peligro(int id, String titulo, String descripcion) {
+    public Peligro(int id, String titulo, String descripcion, String dirección, String barrio, String ciudad, String provincia,Integer responsableId,Integer categoriaId) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.estado = EstadoPeligro.NUEVO.getCodigo();
+        this.codigo = RandomStringGenerator.generateRandomString(5); //Genera un código aleatorio
+        this.barrio = barrio;
+        this.ciudad = ciudad;
+        this.provincia = provincia;
+        this.responsableId = responsableId;
+        this.categoriaId = categoriaId;
         this.fechaCreado = new Timestamp(System.currentTimeMillis());
         this.fechaModificado = new Timestamp(System.currentTimeMillis());
     }
 
-    
+
 	public Integer getId() {
 		return id;
 	}

@@ -14,13 +14,34 @@ public class PeligroController {
         return peligros;
     }
 
-	
-    public void crearPeligro(String titulo, String descripcion) {
+    public void crearPeligro(String titulo, String descripcion, String direccion,String barrio,String ciudad,String provincia,Integer responsableId,Integer categoriaId) {
         int nuevoId = peligros.size() + 1; 
-        Peligro nuevoPeligro = new Peligro(nuevoId, titulo, descripcion);
+        if(!validarEntrada( titulo, descripcion,direccion,barrio,ciudad,provincia,responsableId,categoriaId)) {
+        	return;
+        }
+        Peligro nuevoPeligro = new Peligro(nuevoId, titulo, descripcion,direccion,barrio,ciudad,provincia,responsableId,categoriaId);
         peligros.add(nuevoPeligro);
         System.out.println("Peligro creado: " + nuevoPeligro);
     }
+    
+    
+    public void editarPeligro(int id, String titulo, String descripcion , String direccion,String barrio,String ciudad,String provincia,Integer responsableId,Integer categoriaId) {
+        Optional<Peligro> peligroOptional = buscarPeligroPorId(id);
+        if (peligroOptional.isPresent()) {
+            Peligro peligro = peligroOptional.get();
+            if(!validarEntrada( titulo, descripcion,direccion,barrio,ciudad,provincia,responsableId,categoriaId)) {
+                return;
+            }
+            peligro.setTitulo(titulo);
+            peligro.setDescripcion(descripcion);
+            System.out.println("Peligro actualizado: " + peligro);
+            return;
+        }
+        System.out.println("No se encontró el peligro con ID: " + id);
+        return;
+    }
+    
+    
     
    public boolean eliminarPeligro(int id) {
         Optional<Peligro> peligroAEliminar = buscarPeligroPorId(id);
@@ -39,6 +60,15 @@ public class PeligroController {
                 .findFirst();
     }
 	
+    public void mostrarPeligro(int id) {
+        if (peligros.isEmpty()) {
+            System.out.println("No hay peligros registrados.");
+        } else {
+        	var peligro = buscarPeligroPorId(id);
+            System.out.println(peligro);
+        }
+    }
+    
     public void mostrarPeligros() {
         if (peligros.isEmpty()) {
             System.out.println("No hay peligros registrados.");
@@ -48,4 +78,52 @@ public class PeligroController {
             }
         }
     }
+    
+    
+
+	public boolean validarEntrada(String titulo, String descripcion, String direccion,String barrio,String ciudad,String provincia,Integer responsableId,Integer categoriaId) {
+	    if (titulo == null || titulo.trim().isEmpty()) {
+	        System.out.println("Error: El título no puede estar vacío.");
+	        return false;
+	    }
+	    
+	    if (descripcion == null || descripcion.trim().isEmpty()) {
+	        System.out.println("Error: La descripción no puede estar vacía.");
+	        return false;
+	    }
+	    
+	    if (direccion == null || direccion.trim().isEmpty()) {
+	        System.out.println("Error: La dirección no puede estar vacía.");
+	        return false;
+	    }
+	    
+	    if (barrio == null || barrio.trim().isEmpty()) {
+	        System.out.println("Error: El barrio no puede estar vacío.");
+	        return false;
+	    }
+	    
+	    if (ciudad == null || ciudad.trim().isEmpty()) {
+	        System.out.println("Error: La ciudad no puede estar vacía.");
+	        return false;
+	    }
+	    
+	    if (provincia == null || provincia.trim().isEmpty()) {
+	        System.out.println("Error: La provincia no puede estar vacía.");
+	        return false;
+	    }
+	    
+	    if (responsableId == null || responsableId <= 0) {
+	        System.out.println("Error: El ID del responsable debe ser un número positivo.");
+	        return false;
+	    }
+	    
+	    if (categoriaId == null || categoriaId <= 0) {
+	        System.out.println("Error: El ID de la categoría debe ser un número positivo.");
+	        return false;
+	    }
+
+
+        return true;
+	}
+		
 }

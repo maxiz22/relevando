@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import ar.nix.relevando.models.Peligro;
 import ar.nix.relevando.models.Responsable;
 
 public class ResponsableController {
@@ -16,8 +15,30 @@ public class ResponsableController {
     }
 	
 
+	public boolean validarEntrada(String nombre,String email,String telefono) {
+	   if (nombre == null || nombre.trim().isEmpty()) {
+	        System.out.println("Error: El nombre no puede estar vacío.");
+	        return false;
+	    }
+	    
+	    if (email == null || email.trim().isEmpty()) {
+	        System.out.println("Error: El email no puede estar vacío.");
+	        return false;
+	    }
+	    
+	    if (telefono == null || telefono.trim().isEmpty()) {
+	        System.out.println("Error: El teléfono no puede estar vacío.");
+	        return false;
+	    }
+        return true;
+	}
+	
 	
     public void crearResponsable(String nombre, String email, String telefono) {
+    	
+    	if(!validarEntrada(nombre,email,telefono)) {
+    		return;
+    	}
         int nuevoId = responsables.size() + 1; 
         Responsable responsable = new Responsable(nuevoId, nombre, email,telefono);
         responsables.add(responsable);

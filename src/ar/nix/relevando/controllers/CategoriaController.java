@@ -15,8 +15,27 @@ public class CategoriaController {
 		return categorias;
 	}
 
+	public boolean validarEntrada(String titulo,String descripcion) {
+       if (titulo == null || titulo.trim().isEmpty()) {
+            System.out.println("Error: El título no puede estar vacío.");
+            return false;
+        }
+        
+        if (descripcion == null || descripcion.trim().isEmpty()) {
+            System.out.println("Error: La descripción no puede estar vacía.");
+            return false;
+        }
+
+        return true;
+	}
+	
+	
 	public void crearCategoria(String titulo, String descripcion) {
 	    int nuevoId = categorias.size() + 1; 
+	    
+	    if(!validarEntrada(titulo,descripcion)) {
+	    	return;
+	    }
 	    Categoria nuevaCategoria = new Categoria(nuevoId, titulo, descripcion);
 	    categorias.add(nuevaCategoria);
 	    System.out.println("Peligro creado: " + nuevaCategoria);
