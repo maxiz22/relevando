@@ -15,14 +15,7 @@ public class Categoria extends DbModel {
     private Timestamp fechaCreacion;
     private Timestamp fechaModificado;
     
-    
-    @Override
-    public String getTable() {
-        return "categorias";
-    }
-    
-
-    
+  
     public Categoria(Integer id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
@@ -46,6 +39,12 @@ public class Categoria extends DbModel {
     }
     
     public Categoria() {}
+    
+    @Override
+    public String getTable() {
+        return "categorias";
+    }
+    
     
 	public Integer getId() {
 		return id;
