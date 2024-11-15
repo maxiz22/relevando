@@ -2,13 +2,14 @@ package ar.nix.relevando.models;
 
 import java.sql.Timestamp;
 
-public class Responsable {
-
+public class Responsable extends DbModel {
+	
+	protected String table = "responsables";
     private Integer id;
     private String nombre;
     private String email;
     private String telefono;
-    private Timestamp fechaCreado;
+    private Timestamp fechaCreacion;
     private Timestamp fechaModificado;
     
     public Responsable(Integer id, String nombre, String email, String telefono) {
@@ -16,7 +17,7 @@ public class Responsable {
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
-        this.fechaCreado = new Timestamp(System.currentTimeMillis());
+        this.fechaCreacion = new Timestamp(System.currentTimeMillis());
         this.fechaModificado = new Timestamp(System.currentTimeMillis());
     }
     

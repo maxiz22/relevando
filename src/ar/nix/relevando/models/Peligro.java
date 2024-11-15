@@ -5,8 +5,9 @@ import java.sql.Timestamp;
 import ar.nix.relevando.enums.EstadoPeligro;
 import ar.nix.relevando.utils.RandomStringGenerator;
 
-public class Peligro {
+public class Peligro extends DbModel {
 
+	protected String table = "peligros";
     private Integer id;
     private String titulo;
     private String descripcion;

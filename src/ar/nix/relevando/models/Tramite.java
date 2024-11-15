@@ -2,8 +2,9 @@ package ar.nix.relevando.models;
 
 import java.sql.Timestamp;
 
-public class Tramite {
+public class Tramite extends DbModel {
 
+	protected String table = "tramites";
 	private Integer id;
 	private Integer peligroId;
 	private Integer responsableId;

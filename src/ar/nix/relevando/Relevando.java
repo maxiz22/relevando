@@ -4,6 +4,7 @@ import ar.nix.relevando.views.MenuPrincipal;
 import ar.nix.relevando.controllers.CategoriaController;
 import ar.nix.relevando.controllers.ResponsableController;
 import ar.nix.relevando.controllers.TramiteController;
+import ar.nix.relevando.database.MysqlConnection;
 import ar.nix.relevando.controllers.PeligroController;
 
 public class Relevando {
@@ -16,9 +17,14 @@ public class Relevando {
 	
 	
     public Relevando() {
+    	this.initDatabase();
     	this.initApp();
     }
     
+    
+    public void initDatabase() {
+    	MysqlConnection.initialize("localhost", "root", "", "relevando_s21");
+    }
 
     public void initApp() {
     	
