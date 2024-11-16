@@ -9,7 +9,6 @@ import java.util.List;
 public class Categoria extends DbModel {
 
 
-    private Integer id;
     private String nombre;
     private String descripcion;
     private Timestamp fechaCreado;
@@ -38,18 +37,15 @@ public class Categoria extends DbModel {
     
     public Categoria() {}
     
+	public Integer getId() {
+		return this.id;
+	}
+	
     @Override
     public String getTable() {
         return "categorias";
     }
     
-    
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public String getNombre() {
 		return nombre;
 	}

@@ -8,8 +8,6 @@ import java.util.List;
 
 public class Responsable extends DbModel {
 	
-
-    private Integer id;
     private String nombre;
     private String email;
     private String telefono;
@@ -40,17 +38,15 @@ public class Responsable extends DbModel {
     
     public Responsable() {}
     
+	public Integer getId() {
+		return this.id;
+	}
+	
 	@Override
 	public String getTable() {
 		return "responsables";
 	}
 	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public String getEmail() {
 		return email;
 	}

@@ -3,19 +3,19 @@
 -- -----------------------------------------------------
 -- Categorias
 -- -----------------------------------------------------
-INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `fecha_creacion`, `fecha_modificado`) 
+INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `fecha_creado`, `fecha_modificado`) 
 VALUES (1, 'Alumbrado público', 'Peligros en alumbrado público o afines', '2024-10-03 18:04:02', '2024-10-03 18:04:02');
 
-INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `fecha_creacion`, `fecha_modificado`) 
+INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `fecha_creado`, `fecha_modificado`) 
 VALUES (2, 'Cartelería', 'Peligros en carteles o publicidades', '2024-10-03 18:05:19', '2024-10-03 18:05:19');
 
-INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `fecha_creacion`, `fecha_modificado`) 
+INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `fecha_creado`, `fecha_modificado`) 
 VALUES (3, 'Boca de tormenta', 'Peligros con desagües y boca de tormenta', '2024-10-03 18:06:17', '2024-10-03 18:06:17');
 
-INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `fecha_creacion`, `fecha_modificado`) 
+INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `fecha_creado`, `fecha_modificado`) 
 VALUES (4, 'Cables expuestos', 'Peligros con cables expuestos a la vista', '2024-10-03 18:07:55', '2024-10-03 18:07:55');
 
-INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `fecha_creacion`, `fecha_modificado`) 
+INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `fecha_creado`, `fecha_modificado`) 
 VALUES (5, 'Arbol', 'Peligros relacionados con árboles, vegetación o afines', '2024-10-03 18:08:35', '2024-10-03 18:08:35');
 
 

@@ -12,7 +12,7 @@ import ar.nix.relevando.utils.RandomStringGenerator;
 public class Peligro extends DbModel {
 
 
-    private Integer id;
+    protected Integer id;
     private String titulo;
     private String descripcion;
     private String codigo;
@@ -66,17 +66,15 @@ public class Peligro extends DbModel {
     
     public Peligro() {}
     
+	public Integer getId() {
+		return this.id;
+	}
+	
 	@Override
 	public String getTable() {
 		return "peligros";
 	}
 	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public String getDescripcion() {
 		return descripcion;
 	}

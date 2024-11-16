@@ -10,8 +10,6 @@ import ar.nix.relevando.enums.EstadoTramite;
 
 public class Tramite extends DbModel {
 
-
-	private Integer id;
 	private Integer peligroId;
 	private Integer responsableId;
 	private Integer estado;
@@ -45,18 +43,16 @@ public class Tramite extends DbModel {
     }
     
     public Tramite() {}
-    
+        
+	public Integer getId() {
+		return this.id;
+	}
+	
 	@Override
 	public String getTable() {
 		return "tramites";
 	}
 	   
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public Integer getResponsableId() {
 		return responsableId;
 	}

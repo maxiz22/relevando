@@ -41,7 +41,7 @@ public class TramiteController {
         }
      
         Tramite tramite = new Tramite(null, peligroId, responsableId,estado,descripcion);
-        tramite.save();
+
         tramites.add(tramite);
         System.out.println("Trámite creado: " + tramite);
    
@@ -52,6 +52,8 @@ public class TramiteController {
         }else if(estado == EstadoTramite.SOLUCIONADO.getCodigo()) {
         	peligro.setEstado(EstadoPeligro.SOLUCIONADO.getCodigo());
         }
+        tramite.save();
+        peligro.save();
     }
     
     public void editarTramite(int id, Integer peligroId, Integer responsableId, Integer estado, String descripcion) throws PeligroNotFoundException {
