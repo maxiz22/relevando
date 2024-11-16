@@ -76,8 +76,9 @@ public abstract class DbModel {
 	    	String table = getTable();
 	        String whereClause = "id = "+idParam;
 	        String sql = "SELECT * FROM " + table + " WHERE " + whereClause + " LIMIT 1";
-	        try (Connection conn = MysqlConnection.getConnection();
-	             PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        try {
+	        	Connection conn = MysqlConnection.getConnection();
+	            PreparedStatement stmt = conn.prepareStatement(sql);
 	            ResultSet rs = stmt.executeQuery();
 	            return rs;
 	        } catch (SQLException e) {
@@ -90,10 +91,8 @@ public abstract class DbModel {
 	    public ResultSet findAllFromDb() {
 	    	String table = getTable();
 	        String sql = "SELECT * FROM " + table;
-	
 	        try  {
 	        	Connection conn = MysqlConnection.getConnection();
-	          	System.out.println("SQL: "+sql);
 	        	PreparedStatement stmt = conn.prepareStatement(sql);
 	            ResultSet rs = stmt.executeQuery();
 	            return rs;
@@ -103,16 +102,14 @@ public abstract class DbModel {
 			return null;
 	    }
     
-    public boolean deleteFromDb() {
+    public boolean deleteFromDb(Integer idParam) {
     	String table = getTable();
-        String whereClause = "id = ?";
-        Object[] params = { this.id };
+        String whereClause = "id = "+idParam;
         String sql = "DELETE FROM " + table + " WHERE " + whereClause;
-        try (Connection conn = MysqlConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            for (int i = 0; i < params.length; i++) {
-                stmt.setObject(i + 1, params[i]);
-            }
+        try  {
+        	System.out.println(sql);
+        	Connection conn = MysqlConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

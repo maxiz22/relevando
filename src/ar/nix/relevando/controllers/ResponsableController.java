@@ -39,7 +39,6 @@ public class ResponsableController {
 	
 	
     public void crearResponsable(String nombre, String email, String telefono) {
-    	
     	if(!validarEntrada(nombre,email,telefono)) {
     		return;
     	}
@@ -53,9 +52,8 @@ public class ResponsableController {
    public boolean eliminarResponsable(int id) {
         Optional<Responsable> responsable = buscarResponsablePorId(id);
         if (responsable.isPresent()) {
-        	
         	var resp = responsable.get();
-        	resp.deleteFromDb();
+        	resp.deleteFromDb(resp.getId());
         	responsables.remove(resp);
             System.out.println("Responsable eliminado con ID: " + id);
             return true;
@@ -65,7 +63,6 @@ public class ResponsableController {
     }
   
     public Optional<Responsable> buscarResponsablePorId(int id) {
-    	
 		Responsable resp = new Responsable();
 		var respData = resp.findOne(id);
 		return Optional.of(respData);

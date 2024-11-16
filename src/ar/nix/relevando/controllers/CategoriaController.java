@@ -44,7 +44,7 @@ public class CategoriaController {
 	    Optional<Categoria> categoria = buscarCategoriaPorId(id);
 	    if (categoria.isPresent()) {
 	    	var cat = categoria.get();
-	    	cat.deleteFromDb();
+	    	cat.deleteFromDb(cat.getId());
             categorias.remove(cat);
             System.out.println("Categoria eliminada con ID: " + id);
 	        return true;

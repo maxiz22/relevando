@@ -14,9 +14,9 @@ public class MysqlConnection {
 
 	 public static Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {
-	        throw new IllegalStateException("La conexión no ha sido inicializada o está cerrada.");
-	        }
-	     return connection;
+            reconnect();
+	    }
+	    return connection;
 	 }
 	 
 	 public static void initialize(String host, String user, String pass, String database) {

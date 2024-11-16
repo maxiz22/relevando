@@ -84,7 +84,7 @@ public class TramiteController {
         if (tramite.isPresent()) {
         	
         	var tram = tramite.get();
-        	tram.deleteFromDb();
+        	tram.deleteFromDb(tram.getId());
         	
         	tramites.remove(tram);
             System.out.println("Responsable eliminado con ID: " + id);

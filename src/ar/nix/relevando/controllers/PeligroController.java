@@ -53,7 +53,7 @@ public class PeligroController {
         if (peligroAEliminar.isPresent()) {
         	
         	var peligro = peligroAEliminar.get();
-        	peligro.deleteFromDb();
+        	peligro.deleteFromDb(peligro.getId());
             peligros.remove(peligro);
             System.out.println("Peligro eliminado con ID: " + id);
             return true;

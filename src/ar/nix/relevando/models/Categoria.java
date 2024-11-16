@@ -89,8 +89,9 @@ public class Categoria extends DbModel {
     }
     
     public Categoria findOne(Integer idParam) {
-    	var resultSet = this.findOneFromDb(idParam);
     	Categoria model = null;
+    	var resultSet = this.findOneFromDb(idParam);
+
     	try {
     		
     	     System.out.println(resultSet);
