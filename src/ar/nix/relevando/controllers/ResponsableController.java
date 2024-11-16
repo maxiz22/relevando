@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import ar.nix.relevando.models.Categoria;
 import ar.nix.relevando.models.Responsable;
 
 public class ResponsableController {
@@ -11,7 +12,10 @@ public class ResponsableController {
 	private List<Responsable> responsables = new ArrayList<>();
 
 	public List<Responsable> getResponsables() {
-        return responsables;
+		Responsable responsable = new Responsable();
+		var responsableData = responsable.findAll();
+		this.responsables = responsableData;
+		return responsables;
     }
 	
 
@@ -41,6 +45,7 @@ public class ResponsableController {
     	}
         int nuevoId = responsables.size() + 1; 
         Responsable responsable = new Responsable(nuevoId, nombre, email,telefono);
+        responsable.save();
         responsables.add(responsable);
         System.out.println("Responsable creado: " + responsable);
     }
@@ -48,7 +53,10 @@ public class ResponsableController {
    public boolean eliminarResponsable(int id) {
         Optional<Responsable> responsable = buscarResponsablePorId(id);
         if (responsable.isPresent()) {
-        	responsables.remove(responsable.get());
+        	
+        	var resp = responsable.get();
+        	resp.deleteFromDb();
+        	responsables.remove(resp);
             System.out.println("Responsable eliminado con ID: " + id);
             return true;
         }
@@ -57,12 +65,14 @@ public class ResponsableController {
     }
   
     public Optional<Responsable> buscarResponsablePorId(int id) {
-        return responsables.stream()
-                .filter(p -> p.getId() == id)
-                .findFirst();
+    	
+		Responsable resp = new Responsable();
+		var respData = resp.findOne(id);
+		return Optional.of(respData);
     }
 	
     public void mostrarResponsables() {
+    	this.getResponsables();
         if (responsables.isEmpty()) {
             System.out.println("No hay peligros registrados.");
         } else {

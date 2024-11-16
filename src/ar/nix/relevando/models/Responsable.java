@@ -38,6 +38,8 @@ public class Responsable extends DbModel {
         }
     }
     
+    public Responsable() {}
+    
 	@Override
 	public String getTable() {
 		return "responsables";

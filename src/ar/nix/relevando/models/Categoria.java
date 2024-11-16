@@ -24,8 +24,6 @@ public class Categoria extends DbModel {
         this.setFechaModificado(new Timestamp(System.currentTimeMillis()));
     }
     
-    
-    
     public Categoria(ResultSet rs) {
         try {
             this.id = rs.getInt("id");
@@ -94,6 +92,9 @@ public class Categoria extends DbModel {
     	var resultSet = this.findOneFromDb(idParam);
     	Categoria model = null;
     	try {
+    		
+    	     System.out.println(resultSet);
+    	     
 			while (resultSet.next()) {
 				model = new Categoria(resultSet);
 			}

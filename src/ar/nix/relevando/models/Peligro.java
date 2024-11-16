@@ -63,6 +63,8 @@ public class Peligro extends DbModel {
         }
     }
     
+    public Peligro() {}
+    
 	@Override
 	public String getTable() {
 		return "peligros";

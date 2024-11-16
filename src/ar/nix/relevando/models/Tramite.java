@@ -42,6 +42,8 @@ public class Tramite extends DbModel {
         }
     }
     
+    public Tramite() {}
+    
 	@Override
 	public String getTable() {
 		return "tramites";

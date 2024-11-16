@@ -74,15 +74,12 @@ public abstract class DbModel {
 	    // Método para encontrar un registro
 	    public ResultSet findOneFromDb(Integer idParam) {
 	    	String table = getTable();
-	        String whereClause = "id = ?";
-	        Object[] params = { idParam };
+	        String whereClause = "id = "+idParam;
 	        String sql = "SELECT * FROM " + table + " WHERE " + whereClause + " LIMIT 1";
 	        try (Connection conn = MysqlConnection.getConnection();
 	             PreparedStatement stmt = conn.prepareStatement(sql)) {
-	            for (int i = 0; i < params.length; i++) {
-	                stmt.setObject(i + 1, params[i]);
-	            }
-	            return stmt.executeQuery();
+	            ResultSet rs = stmt.executeQuery();
+	            return rs;
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            return null;

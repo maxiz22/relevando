@@ -1,6 +1,5 @@
 package ar.nix.relevando.controllers;
 
-import ar.nix.relevando.models.Responsable;
 import ar.nix.relevando.models.Tramite;
 import ar.nix.relevando.models.Peligro;
 import ar.nix.relevando.Relevando;
@@ -22,6 +21,12 @@ public class TramiteController {
 		this.relevandoApp = relevandoApp;
 	}
 	
+	public List<Tramite> getTramites() {
+		Tramite tramiteModel = new Tramite();
+		var tramiteData = tramiteModel.findAll();
+		this.tramites = tramiteData;
+		return tramites;
+    }
 	
 	
     public void crearTramite(Integer peligroId, Integer responsableId, Integer estado,String descripcion) throws PeligroNotFoundException {
@@ -32,26 +37,20 @@ public class TramiteController {
         if (peligroOptional.isPresent()) {
         	peligro = peligroOptional.get();
         }else {
-        	
             throw new PeligroNotFoundException("El peligro con ID " + peligroId + " no existe.");
-
         }
      
         Tramite tramite = new Tramite(nuevoId, peligroId, responsableId,estado,descripcion);
+        tramite.save();
         tramites.add(tramite);
         System.out.println("Trámite creado: " + tramite);
    
-        
-        
         if(estado == EstadoTramite.PENDIENTE.getCodigo()) {
-        	
             System.out.println("Se ha ejecutado el envío de la notificación del trámite " + nuevoId);
-            
             tramite.setEstado(EstadoTramite.EJECUTADO.getCodigo());
-         	 peligro.setEstado(EstadoPeligro.TRAMITADO.getCodigo());
+         	peligro.setEstado(EstadoPeligro.TRAMITADO.getCodigo());
         }else if(estado == EstadoTramite.SOLUCIONADO.getCodigo()) {
-        	
-        	 peligro.setEstado(EstadoPeligro.SOLUCIONADO.getCodigo());
+        	peligro.setEstado(EstadoPeligro.SOLUCIONADO.getCodigo());
         }
     }
     
@@ -83,7 +82,11 @@ public class TramiteController {
    public boolean eliminarTramite(int id) {
         Optional<Tramite> tramite = buscarTramitePorId(id);
         if (tramite.isPresent()) {
-        	tramites.remove(tramite.get());
+        	
+        	var tram = tramite.get();
+        	tram.deleteFromDb();
+        	
+        	tramites.remove(tram);
             System.out.println("Responsable eliminado con ID: " + id);
             return true;
         }
@@ -92,11 +95,13 @@ public class TramiteController {
     }
   
    public Optional<Tramite> buscarTramitePorId(int id) {
-       return tramites.stream()
-               .filter(p -> p.getId() == id)
-               .findFirst();
+	   Tramite model = new Tramite();
+	   var data = model.findOne(id);
+	   return Optional.of(data);
    }
+   
     public void mostrarTramites() {
+    	this.getTramites();
         if (tramites.isEmpty()) {
             System.out.println("No hay peligros registrados.");
         } else {

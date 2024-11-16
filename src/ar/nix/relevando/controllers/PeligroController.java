@@ -11,7 +11,10 @@ public class PeligroController {
 	private List<Peligro> peligros = new ArrayList<>();
 
 	public List<Peligro> getPeligros() {
-        return peligros;
+		Peligro peligroModel = new Peligro();
+		var peligrosData = peligroModel.findAll();
+		this.peligros = peligrosData;
+		return peligros;
     }
 
     public void crearPeligro(String titulo, String descripcion, String direccion,String barrio,String ciudad,String provincia,Integer responsableId,Integer categoriaId) {
@@ -20,6 +23,7 @@ public class PeligroController {
         	return;
         }
         Peligro nuevoPeligro = new Peligro(nuevoId, titulo, descripcion,direccion,barrio,ciudad,provincia,responsableId,categoriaId);
+        nuevoPeligro.save();
         peligros.add(nuevoPeligro);
         System.out.println("Peligro creado: " + nuevoPeligro);
     }
@@ -35,6 +39,7 @@ public class PeligroController {
             peligro.setTitulo(titulo);
             peligro.setDescripcion(descripcion);
             System.out.println("Peligro actualizado: " + peligro);
+            peligro.save();
             return;
         }
         System.out.println("No se encontró el peligro con ID: " + id);
@@ -46,7 +51,10 @@ public class PeligroController {
    public boolean eliminarPeligro(int id) {
         Optional<Peligro> peligroAEliminar = buscarPeligroPorId(id);
         if (peligroAEliminar.isPresent()) {
-            peligros.remove(peligroAEliminar.get());
+        	
+        	var peligro = peligroAEliminar.get();
+        	peligro.deleteFromDb();
+            peligros.remove(peligro);
             System.out.println("Peligro eliminado con ID: " + id);
             return true;
         }
@@ -55,21 +63,22 @@ public class PeligroController {
     }
   
     public Optional<Peligro> buscarPeligroPorId(int id) {
-        return peligros.stream()
-                .filter(p -> p.getId() == id)
-                .findFirst();
+       Peligro model = new Peligro();
+ 	   var data = model.findOne(id);
+ 	   return Optional.of(data);
     }
 	
     public void mostrarPeligro(int id) {
-        if (peligros.isEmpty()) {
-            System.out.println("No hay peligros registrados.");
-        } else {
-        	var peligro = buscarPeligroPorId(id);
+    	var peligro = buscarPeligroPorId(id);
+        if (peligro.get().getId() > 0) {
             System.out.println(peligro);
+        } else {
+            System.out.println("Peligro no encontrado");	
         }
     }
     
     public void mostrarPeligros() {
+    	this.getPeligros();
         if (peligros.isEmpty()) {
             System.out.println("No hay peligros registrados.");
         } else {
