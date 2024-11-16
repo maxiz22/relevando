@@ -26,7 +26,7 @@ public class MenuPrincipal extends Menu {
         switch (opcion) {
 
             case 1:
-            	  PeligroView menuPeligros = new PeligroView(relevandoApp.getPeligroController());
+            	  PeligroView menuPeligros = new PeligroView(relevandoApp.getPeligroController(),relevandoApp);
             	  menuPeligros.iniciarMenu();
                   break;
             case 2:

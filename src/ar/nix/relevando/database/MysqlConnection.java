@@ -31,7 +31,6 @@ public class MysqlConnection {
             System.out.println("Base de datos conectada con éxito.");
         } catch (SQLException e) {
             System.out.println("!! Error al conectar a la base de datos.  "+e.getMessage());
-           // e.printStackTrace();
         }
     }
 	 

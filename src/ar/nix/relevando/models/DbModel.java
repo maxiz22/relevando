@@ -13,10 +13,9 @@ import java.util.LinkedHashMap;
 
 public abstract class DbModel {
 
-
+	protected Integer id;
     public abstract String getTable();
-    protected Integer id;
-    
+  
 	 
     // Método para guardar un registro
 	public boolean save() {
@@ -68,40 +67,41 @@ public abstract class DbModel {
 	        return false;
 	    }
 	    
-	       return false;
+	   return false;
 	}
 
-	    // Método para encontrar un registro
-	    public ResultSet findOneFromDb(Integer idParam) {
-	    	String table = getTable();
-	        String whereClause = "id = "+idParam;
-	        String sql = "SELECT * FROM " + table + " WHERE " + whereClause + " LIMIT 1";
-	        try {
-	        	Connection conn = MysqlConnection.getConnection();
-	            PreparedStatement stmt = conn.prepareStatement(sql);
-	            ResultSet rs = stmt.executeQuery();
-	            return rs;
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            return null;
-	        }
-	    }
+    // Método para encontrar un registro
+    public ResultSet findOneFromDb(Integer idParam) {
+    	String table = getTable();
+        String whereClause = "id = "+idParam;
+        String sql = "SELECT * FROM " + table + " WHERE " + whereClause + " LIMIT 1";
+        try {
+        	Connection conn = MysqlConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-	    // Método para encontrar múltiples registros
-	    public ResultSet findAllFromDb() {
-	    	String table = getTable();
-	        String sql = "SELECT * FROM " + table;
-	        try  {
-	        	Connection conn = MysqlConnection.getConnection();
-	        	PreparedStatement stmt = conn.prepareStatement(sql);
-	            ResultSet rs = stmt.executeQuery();
-	            return rs;
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-			return null;
-	    }
+    // Encontrar todos los registros
+    public ResultSet findAllFromDb() {
+    	String table = getTable();
+        String sql = "SELECT * FROM " + table;
+        try  {
+        	Connection conn = MysqlConnection.getConnection();
+        	PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		return null;
+    }
     
+    //Borrar registro
     public boolean deleteFromDb(Integer idParam) {
     	String table = getTable();
         String whereClause = "id = "+idParam;
@@ -117,7 +117,7 @@ public abstract class DbModel {
         }
     }
     
-    
+    //Extraer columnas de los modelos parametrizado
     public Map<String, Object> toSql() {
         Map<String, Object> columnValueMap = new LinkedHashMap<>();
         Field[] fields = this.getClass().getDeclaredFields();

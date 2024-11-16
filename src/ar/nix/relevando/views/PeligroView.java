@@ -1,14 +1,17 @@
 package ar.nix.relevando.views;
 
+import ar.nix.relevando.Relevando;
 import ar.nix.relevando.controllers.PeligroController;
 
 public class PeligroView extends Menu {
 
 
     private PeligroController peligroController;
-
-    public PeligroView(PeligroController peligroController) {
+    private Relevando relevandoApp;
+    
+    public PeligroView(PeligroController peligroController,Relevando relevandoApp) {
         this.peligroController = peligroController;
+        this.relevandoApp = relevandoApp;
     }
     
     
@@ -42,10 +45,10 @@ public class PeligroView extends Menu {
                 String ciudad = scanner.nextLine();
                 System.out.println("Ingrese la provincia del peligro:");
                 String provincia = scanner.nextLine();
-                
+                relevandoApp.getCategoriaController().mostrarCategorias();
                 System.out.println("Ingrese el id de categoría del peligro:");
                 Integer categoriaId = scanner.nextInt();
-                
+                relevandoApp.getResponsableController().mostrarResponsables();
                 System.out.println("Ingrese el id de responsable del peligro:");
                 Integer responsableId = scanner.nextInt();
                 
@@ -57,9 +60,16 @@ public class PeligroView extends Menu {
             	peligroController.mostrarPeligros();
                 break;
             case 3:
+            	peligroController.mostrarPeligros();
                 System.out.println("Ingrese el ID del peligro:");
                 id = scanner.nextInt();
-                peligroController.mostrarPeligro(id);
+                
+                System.out.println("ID del peligro ingresado: "+id);
+         
+                PeligroSingleView  menuPeligroSingle = new PeligroSingleView(this.relevandoApp,id);
+                menuPeligroSingle.iniciarMenu();
+                
+            
                 break;
             case 4:
                 System.out.println("Ingrese el ID del peligro a modificar:");
@@ -79,10 +89,12 @@ public class PeligroView extends Menu {
                 System.out.println("Ingrese la nueva provincia del peligro:");
                 String provinciaModificada = scanner.nextLine();
 
+                relevandoApp.getCategoriaController().mostrarCategorias();
                 System.out.println("Ingrese el nuevo ID de categoría del peligro:");
                 Integer categoriaIdModificado = scanner.nextInt();
                 scanner.nextLine(); 
 
+                relevandoApp.getResponsableController().mostrarResponsables();
                 System.out.println("Ingrese el nuevo ID de responsable del peligro:");
                 Integer responsableIdModificado = scanner.nextInt();
                 scanner.nextLine(); 

@@ -6,15 +6,17 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.nix.relevando.enums.EstadoTramite;
+
 public class Tramite extends DbModel {
 
-	protected String table = "tramites";
+
 	private Integer id;
 	private Integer peligroId;
 	private Integer responsableId;
 	private Integer estado;
 	private String descripcion;
-    private Timestamp fechaCreacion;
+    private Timestamp fechaCreado;
     private Timestamp fechaModificado;
     
     public Tramite(Integer id, Integer peligroId,Integer responsableId, Integer estado,String descripcion) {
@@ -23,7 +25,7 @@ public class Tramite extends DbModel {
         this.responsableId = responsableId;
         this.estado = estado;
         this.descripcion = descripcion;
-        this.fechaCreacion = new Timestamp(System.currentTimeMillis());
+        this.fechaCreado = new Timestamp(System.currentTimeMillis());
         this.fechaModificado = new Timestamp(System.currentTimeMillis());
         
     }
@@ -35,7 +37,7 @@ public class Tramite extends DbModel {
             this.responsableId = rs.getInt("responsable_id");
             this.estado = rs.getInt("estado");
             this.descripcion = rs.getString("descripcion");
-            this.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+            this.setFechaCreado(rs.getTimestamp("fecha_creado"));
             this.setFechaModificado(rs.getTimestamp("fecha_modificado"));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,15 +70,18 @@ public class Tramite extends DbModel {
 		this.estado = estado;
 	}
 	
-    @Override
-    public String toString() {
-        return "Tramite{" +
-                "id=" + id +
-                       ", peligroId=" + peligroId +
-                ", responsableId=" + responsableId +
-                ", estado=" + estado +
-                '}';
-    }
+	@Override
+	public String toString() {
+	    return "Tramite{" +
+	            "id=" + id +
+	            ", peligroId=" + peligroId +
+	            ", responsableId=" + responsableId +
+	            ", estado=" + (EstadoTramite.getByCodigo(estado) != null ? EstadoTramite.getByCodigo(estado).getDescripcion() : "Desconocido") +
+	            ", descripcion='" + descripcion + '\'' +
+	            ", fechaCreado=" + fechaCreado +
+	            ", fechaModificado=" + fechaModificado +
+	            '}';
+	}
 
 	public String getDescripcion() {
 		return descripcion;
@@ -126,12 +131,13 @@ public class Tramite extends DbModel {
     
 
 
-	public Timestamp getFechaCreacion() {
-		return fechaCreacion;
+
+	public Timestamp getFechaCreado() {
+		return fechaCreado;
 	}
 
-	public void setFechaCreacion(Timestamp fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
+	public void setFechaCreado(Timestamp fechaCreado) {
+		this.fechaCreado = fechaCreado;
 	}
 
 	public Timestamp getFechaModificado() {

@@ -42,8 +42,8 @@ public class ResponsableController {
     	if(!validarEntrada(nombre,email,telefono)) {
     		return;
     	}
-        int nuevoId = responsables.size() + 1; 
-        Responsable responsable = new Responsable(nuevoId, nombre, email,telefono);
+    
+        Responsable responsable = new Responsable(null, nombre, email,telefono);
         responsable.save();
         responsables.add(responsable);
         System.out.println("Responsable creado: " + responsable);

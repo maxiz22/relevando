@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `relevando_s21`.`categorias` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(255) NULL,
   `descripcion` VARCHAR(255) NULL,
-  `fecha_creacion` TIMESTAMP NULL,
+  `fecha_creado` TIMESTAMP NULL,
   `fecha_modificado` TIMESTAMP NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `relevando_s21`.`peligros` (
   `estado` INT NOT NULL,
   `ubicacion` POINT NULL,
   `direccion` VARCHAR(255) NULL,
-  `barrrio` VARCHAR(255) NULL,
+  `barrio` VARCHAR(255) NULL,
   `ciudad` VARCHAR(255) NULL,
   `provincia` VARCHAR(255) NULL,
   `fecha_creado` TIMESTAMP NULL,
@@ -92,6 +92,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `relevando_s21`.`tramites` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `estado` INT NOT NULL DEFAULT 1,
+   `descripcion` TEXT NULL,
   `fecha_creado` TIMESTAMP NULL,
   `fecha_modificado` TIMESTAMP NULL,
   `responsable_id` INT NOT NULL,

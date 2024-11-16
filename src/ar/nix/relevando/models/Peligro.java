@@ -11,7 +11,7 @@ import ar.nix.relevando.utils.RandomStringGenerator;
 
 public class Peligro extends DbModel {
 
-	protected String table = "peligros";
+
     private Integer id;
     private String titulo;
     private String descripcion;
@@ -23,12 +23,13 @@ public class Peligro extends DbModel {
     private String ciudad;
     private String provincia;
     private Integer responsableId;
+    private Integer relevadorId  = 1;
     private Integer categoriaId;
-    private Timestamp fechaCreacion;
+    private Timestamp fechaCreado;
     private Timestamp fechaModificado;
     
     
-    public Peligro(int id, String titulo, String descripcion, String dirección, String barrio, String ciudad, String provincia,Integer responsableId,Integer categoriaId) {
+    public Peligro(Integer id, String titulo, String descripcion, String dirección, String barrio, String ciudad, String provincia,Integer responsableId,Integer categoriaId) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -39,7 +40,7 @@ public class Peligro extends DbModel {
         this.provincia = provincia;
         this.responsableId = responsableId;
         this.categoriaId = categoriaId;
-        this.fechaCreacion = new Timestamp(System.currentTimeMillis());
+        this.fechaCreado = new Timestamp(System.currentTimeMillis());
         this.fechaModificado = new Timestamp(System.currentTimeMillis());
     }
 
@@ -56,7 +57,7 @@ public class Peligro extends DbModel {
             this.provincia = rs.getString("provincia");
             this.responsableId = rs.getInt("responsable_id");
             this.categoriaId = rs.getInt("categoria_id");
-            this.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+            this.setFechaCreado(rs.getTimestamp("fecha_creado"));
             this.setFechaModificado(rs.getTimestamp("fecha_modificado"));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -175,12 +176,12 @@ public class Peligro extends DbModel {
     
 
 
-	public Timestamp getFechaCreacion() {
-		return fechaCreacion;
+	public Timestamp getFechaCreado() {
+		return fechaCreado;
 	}
 
-	public void setFechaCreacion(Timestamp fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
+	public void setFechaCreado(Timestamp fechaCreado) {
+		this.fechaCreado = fechaCreado;
 	}
 
 	public Timestamp getFechaModificado() {
@@ -192,15 +193,33 @@ public class Peligro extends DbModel {
 	}
 
 	
-    @Override
-    public String toString() {
-        return "Peligro{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-               // ", location='" + location + '\'' +
-               // ", fechaCreado=" + fechaCreado +
-               // ", fechaModificado=" + fechaModificado +
-                '}';
-    }
+	@Override
+	public String toString() {
+	    return "Peligro{" +
+	            "id=" + id +
+	            ", titulo='" + titulo + '\'' +
+	            ", descripcion='" + descripcion + '\'' +
+	            ", codigo='" + codigo + '\'' +
+	            ", estado='" + (EstadoPeligro.getByCodigo(estado) != null ? EstadoPeligro.getByCodigo(estado).getDescripcion() : "Desconocido") + '\'' +
+	            ", ubicacion=" + (ubicacion != null ? ubicacion.toString() : "null") +
+	            ", direccion='" + direccion + '\'' +
+	            ", barrio='" + barrio + '\'' +
+	            ", ciudad='" + ciudad + '\'' +
+	            ", provincia='" + provincia + '\'' +
+	            ", responsableId=" + responsableId +
+	            ", relevadorId=" + relevadorId +
+	            ", categoriaId=" + categoriaId +
+	            ", fechaCreado=" + fechaCreado +
+	            ", fechaModificado=" + fechaModificado +
+	            '}';
+	}
+
+	public Integer getRelevadorId() {
+		return relevadorId;
+	}
+
+
+	public void setRelevadorId(Integer relevadorId) {
+		this.relevadorId = relevadorId;
+	}
 }

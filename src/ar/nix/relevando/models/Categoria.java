@@ -12,7 +12,7 @@ public class Categoria extends DbModel {
     private Integer id;
     private String nombre;
     private String descripcion;
-    private Timestamp fechaCreacion;
+    private Timestamp fechaCreado;
     private Timestamp fechaModificado;
     
   
@@ -20,7 +20,7 @@ public class Categoria extends DbModel {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.setFechaCreacion(new Timestamp(System.currentTimeMillis()));
+        this.setFechaCreado(new Timestamp(System.currentTimeMillis()));
         this.setFechaModificado(new Timestamp(System.currentTimeMillis()));
     }
     
@@ -29,7 +29,7 @@ public class Categoria extends DbModel {
             this.id = rs.getInt("id");
             this.nombre = rs.getString("nombre");
             this.descripcion = rs.getString("descripcion");
-            this.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+            this.setFechaCreado(rs.getTimestamp("fecha_creado"));
             this.setFechaModificado(rs.getTimestamp("fecha_modificado"));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,9 +93,7 @@ public class Categoria extends DbModel {
     	var resultSet = this.findOneFromDb(idParam);
 
     	try {
-    		
-    	     System.out.println(resultSet);
-    	     
+    	
 			while (resultSet.next()) {
 				model = new Categoria(resultSet);
 			}
@@ -108,13 +106,12 @@ public class Categoria extends DbModel {
     
     
 
-
-	public Timestamp getFechaCreacion() {
-		return fechaCreacion;
+	public Timestamp getFechaCreado() {
+		return fechaCreado;
 	}
 
-	public void setFechaCreacion(Timestamp fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
+	public void setFechaCreado(Timestamp fechaCreado) {
+		this.fechaCreado = fechaCreado;
 	}
 
 	public Timestamp getFechaModificado() {

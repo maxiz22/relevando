@@ -30,7 +30,7 @@ public class TramiteController {
 	
 	
     public void crearTramite(Integer peligroId, Integer responsableId, Integer estado,String descripcion) throws PeligroNotFoundException {
-        int nuevoId = tramites.size() + 1; 
+     
     	Peligro peligro;
         
         Optional<Peligro> peligroOptional = relevandoApp.getPeligroController().buscarPeligroPorId(peligroId);
@@ -40,13 +40,13 @@ public class TramiteController {
             throw new PeligroNotFoundException("El peligro con ID " + peligroId + " no existe.");
         }
      
-        Tramite tramite = new Tramite(nuevoId, peligroId, responsableId,estado,descripcion);
+        Tramite tramite = new Tramite(null, peligroId, responsableId,estado,descripcion);
         tramite.save();
         tramites.add(tramite);
         System.out.println("Trámite creado: " + tramite);
    
         if(estado == EstadoTramite.PENDIENTE.getCodigo()) {
-            System.out.println("Se ha ejecutado el envío de la notificación del trámite " + nuevoId);
+            System.out.println("Se ha ejecutado el envío de la notificación del trámite " + tramite.getId());
             tramite.setEstado(EstadoTramite.EJECUTADO.getCodigo());
          	peligro.setEstado(EstadoPeligro.TRAMITADO.getCodigo());
         }else if(estado == EstadoTramite.SOLUCIONADO.getCodigo()) {
@@ -109,6 +109,22 @@ public class TramiteController {
                 System.out.println(tramite);
             }
         }
+    }
+    
+    public void mostrarTramitesByPeligroId(Integer peligroId) {
+    	this.getTramites();
+    	Boolean print = false;
+        for (Tramite tramite : tramites) {
+        	if(tramite.getPeligroId() == peligroId) {
+                System.out.println(tramite);
+                print = true;
+        	}
+    
+        }
+        if(!print) {
+        	   System.out.println("No se han encontrado trámites");
+        }
+    	
     }
 
 }

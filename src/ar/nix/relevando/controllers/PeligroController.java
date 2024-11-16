@@ -18,11 +18,11 @@ public class PeligroController {
     }
 
     public void crearPeligro(String titulo, String descripcion, String direccion,String barrio,String ciudad,String provincia,Integer responsableId,Integer categoriaId) {
-        int nuevoId = peligros.size() + 1; 
+     
         if(!validarEntrada( titulo, descripcion,direccion,barrio,ciudad,provincia,responsableId,categoriaId)) {
         	return;
         }
-        Peligro nuevoPeligro = new Peligro(nuevoId, titulo, descripcion,direccion,barrio,ciudad,provincia,responsableId,categoriaId);
+        Peligro nuevoPeligro = new Peligro(null, titulo, descripcion,direccion,barrio,ciudad,provincia,responsableId,categoriaId);
         nuevoPeligro.save();
         peligros.add(nuevoPeligro);
         System.out.println("Peligro creado: " + nuevoPeligro);

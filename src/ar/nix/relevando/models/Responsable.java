@@ -8,12 +8,12 @@ import java.util.List;
 
 public class Responsable extends DbModel {
 	
-	protected String table = "responsables";
+
     private Integer id;
     private String nombre;
     private String email;
     private String telefono;
-    private Timestamp fechaCreacion;
+    private Timestamp fechaCreado;
     private Timestamp fechaModificado;
     
     public Responsable(Integer id, String nombre, String email, String telefono) {
@@ -21,7 +21,7 @@ public class Responsable extends DbModel {
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
-        this.fechaCreacion = new Timestamp(System.currentTimeMillis());
+        this.fechaCreado = new Timestamp(System.currentTimeMillis());
         this.fechaModificado = new Timestamp(System.currentTimeMillis());
     }
     
@@ -31,7 +31,7 @@ public class Responsable extends DbModel {
             this.nombre = rs.getString("nombre");
             this.email = rs.getString("email");
             this.telefono = rs.getString("telefono");
-            this.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+            this.setFechaCreado(rs.getTimestamp("fecha_creado"));
             this.setFechaModificado(rs.getTimestamp("fecha_modificado"));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,12 +102,12 @@ public class Responsable extends DbModel {
     
 
 
-	public Timestamp getFechaCreacion() {
-		return fechaCreacion;
+	public Timestamp getFechaCreado() {
+		return fechaCreado;
 	}
 
-	public void setFechaCreacion(Timestamp fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
+	public void setFechaCreado(Timestamp fechaCreado) {
+		this.fechaCreado = fechaCreado;
 	}
 
 	public Timestamp getFechaModificado() {
